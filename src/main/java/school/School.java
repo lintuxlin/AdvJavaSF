@@ -18,6 +18,7 @@ public class School {
 		}
 		return rv;
 	}
+	
 //	public static List<Student> getSmartStudents(List<Student> ls, float threshold) {
 //		List<Student> rv = new ArrayList<>();
 //		for (Student s : ls) {
