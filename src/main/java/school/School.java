@@ -3,15 +3,16 @@ package school;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
-interface StudentCriterion {
-	boolean test(Student s);
-}
+//interface Criterion<E> {
+//	boolean test(E s);
+//}
 
 public class School {
-	public static List<Student> getStudents(List<Student> ls, StudentCriterion criterion) {
-		List<Student> rv = new ArrayList<>();
-		for (Student s : ls) {
+	public static <E> List<E> getSubList(Iterable<E> ls, Predicate<E> criterion) {
+		List<E> rv = new ArrayList<>();
+		for (E s : ls) {
 			if (criterion.test(s)) {
 				rv.add(s);
 			}
@@ -19,6 +20,17 @@ public class School {
 		return rv;
 	}
 	
+
+//	public static <E> List<E> getSubList(Iterable<E> ls, Criterion<E> criterion) {
+//		List<E> rv = new ArrayList<>();
+//		for (E s : ls) {
+//			if (criterion.test(s)) {
+//				rv.add(s);
+//			}
+//		}
+//		return rv;
+//	}
+//	
 //	public static List<Student> getSmartStudents(List<Student> ls, float threshold) {
 //		List<Student> rv = new ArrayList<>();
 //		for (Student s : ls) {
@@ -49,10 +61,12 @@ public class School {
 //		System.out.println("Smart students: " + getSmartStudents(roster, 2.8F));
 //		System.out.println("Enthusiastic students: " + getEnthusiasticStudents(roster, 2));
 		System.out.println("Smart students: " 
-				+ getStudents(roster, s -> s.getGpa() > 3.0F));
+				+ getSubList(roster, s -> s.getGpa() > 3.0F));
 		System.out.println("Enthusiastic students: " 
-				+ getStudents(roster, (Student s) -> s.getCourses().size() > 2));
+				+ getSubList(roster, (Student s) -> s.getCourses().size() > 2));
 
+		
+		List<String> texts = Arrays.asList("Banana", "Orange", "Pea", "Melon", "Aardvark");
+		System.out.println("Long strings: " + getSubList(texts, s -> s.length() > 5));
 	}
-
 }
