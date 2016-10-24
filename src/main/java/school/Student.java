@@ -67,7 +67,21 @@ public class Student {
 		return true;
 	}
 
-	private static Comparator<Student> nameComparator = (o1, o2) -> o1.getName().compareTo(o2.getName());
+
+	public static Comparator<Student> getGpaComparator() {
+		// Note this isn't a singleton!! (it probably should be)
+		return (s1, s2) -> Float.compare(s1.gpa, s2.gpa); 
+	}
+
+	private static Comparator<Student> enthusiamComparator = 
+			(s1, s2) -> s1.courses.size() - s2.courses.size();
+			
+	public static Comparator<Student> getEnthusiamComparator() {
+		return enthusiamComparator;
+	}
+	
+ 	private static Comparator<Student> nameComparator = 
+ 			(o1, o2) -> o1.getName().compareTo(o2.getName());
 		
 	public static Comparator<Student> getNameComparator() {
 		return nameComparator;
