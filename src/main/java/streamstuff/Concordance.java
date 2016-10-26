@@ -12,8 +12,13 @@ import java.util.stream.Stream;
 public class Concordance {
 
 	public static void main(String[] args) {
+		// List l
+		// l.parallelStream()..... 
 		try (Stream<String> input = Files.lines(Paths.get("PrideAndPrejudice.txt"))){
 			input
+//			.parallel() // not very helpful in this case
+//			.unordered() // usually important for throughput
+			.sequential() // last one of parallel and sequential "wins"
 			.flatMap(s -> Stream.of(s.split("\\W+")))
 			.filter(s -> s.length() > 0)
 			.map(s -> s.toLowerCase())
